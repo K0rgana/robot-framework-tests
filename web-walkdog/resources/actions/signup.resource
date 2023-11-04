@@ -5,22 +5,20 @@ Library    Browser
 
 *** Keywords ***
 Go to signup page
-    New Browser     browser=firefox    headless=False
-    New Page        url=https://walkdog.vercel.app/signup
-
-Fill signup form
-    [Arguments]        ${user_info}
+    Click    selector=css=a[href="/signup"]
     
     Wait For Elements State    
     ...    selector=form h1     
     ...    state=visible    
-    ...    timeout=3
+    ...    timeout=5000
     
     Get Text    
     ...    selector=form h1    
     ...    assertion_operator=equal    
     ...    assertion_expected=Faça seu cadastro
 
+Fill signup form
+    [Arguments]        ${user_info}
     Fill Text    
     ...    selector=css=input[name=name]              
     ...    txt=${user_info}[name]
@@ -88,7 +86,12 @@ Feedback should be
     ...    assertion_operator=equal    
     ...    assertion_expected=${expected-message}
     
-Get evidence
-    Sleep    time_=1
-    Take Screenshot
+
+Alert should be
+    [Arguments]    ${expected-text}
+    
+    Wait For Elements State    
+    ...    selector=css=.alert-error >> text=${expected-text}       
+    ...    state=visible   
+    ...    timeout=5
 

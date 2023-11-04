@@ -15,3 +15,6 @@ Start session
     ...    state= visible
     ...    timeout=5
 
+Finish session
+    Sleep    time_=1
+    Take Screenshot    fullPage=True
