@@ -69,7 +69,14 @@ Fill signup form
     Upload File By Selector    
     ...    selector=css=input[type=file]    
     ...    path=${EXECDIR}/resources/fixtures/${user_info}[user_id]
-    
+
+fill extra service
+    [Arguments]    ${expected-text}
+    Click    selector=xpath=//span[text()="${expected-text}"]/..
+
+    #Take Screenshot    selector=xpath=//span[text()="Cuidar"]/../../..
+    #Take Screenshot    selector=css= .walker-service
+
 Submit form
     Click    selector=.button-register
     
