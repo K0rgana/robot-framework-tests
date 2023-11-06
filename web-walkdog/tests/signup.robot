@@ -4,6 +4,9 @@ Documentation    test suite sign up page
 Library    Browser
 Resource    ../resources/base.resource
 
+Test Setup       Start session
+Test Teardown    Finish session
+
 *** Test Cases ***
 should signup a new user
     ${user_info}    Create Dictionary
@@ -18,17 +21,14 @@ should signup a new user
     ...    cityUf=Manaus/AM
     ...    user_id=sample_id.jpeg
 
-    Start session
     Go to signup page
     Fill signup form    ${user_info}
     Submit form
     Feedback should be   expected-message=Recebemos o seu cadastro e em breve retornaremos o contato.
-    Finish session
 
 should not signup if required fields are empty
     [Tags]    required
 
-    Start session
     Go to signup page
     Submit form
 
@@ -38,5 +38,3 @@ should not signup if required fields are empty
     Alert should be    expected-text=Informe o seu CEP
     Alert should be    expected-text=Informe um número maior que zero
     Alert should be    expected-text=Adcione um documento com foto (RG ou CHN)
-
-    Finish session
